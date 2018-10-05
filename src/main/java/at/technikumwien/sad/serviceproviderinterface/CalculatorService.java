@@ -11,15 +11,12 @@ public class CalculatorService {
 		this.serviceLoader = ServiceLoader.load(Calculator.class);
 	}
 	
-	public int sum(int... numbers) {
-		Calculator calculator = serviceLoader.iterator().next();
-		
-		// for(Calculator calculator : serviceLoader) {
-		//	System.out.println(calculator.getClass().getName());
-		// }
-		
-		//TODO! use simple or extended implementation.
-		return calculator.sum(numbers);
+	public int sum(int... numbers) {		
+		for(Calculator calculator : serviceLoader) {
+			if(calculator.canHandle(numbers)) {
+				return calculator.sum(numbers);
+			}
+		}
+		throw new UnsupportedOperationException("No suitable calculator-implementation found.");
 	}
-	
 }

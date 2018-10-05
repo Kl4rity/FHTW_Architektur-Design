@@ -11,4 +11,9 @@ public class CalculatorExtendedImpl implements Calculator {
 		
 		return Arrays.stream(numbers).sum();
 	}
+	
+	@Override
+	public boolean canHandle(int... numbers) {
+		return true;
+	}
 }
